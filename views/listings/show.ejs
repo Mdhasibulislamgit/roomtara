@@ -1,0 +1,177 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="row mt-4">
+  <div class="col-md-8 offset-md-2">
+    <!-- Listing Details Card -->
+    <div class="card listing-card mb-4">
+      <img
+        src="<%= listing.image %>"
+        class="card-img-top show-img"
+        alt="<%= listing.title %>"
+      />
+      <div class="card-body">
+        <h2 class="card-title mb-3"><%= listing.title %></h2>
+        <p class="card-text location mb-2">
+          <i class="fas fa-map-marker-alt text-danger"></i>
+          <%= listing.location %>, <%= listing.country %>
+        </p>
+        <p class="card-text description"><%= listing.description %></p>
+        <h3 class="card-text price mb-4">
+          <span class="badge bg-success fs-5">
+            ₹<%= listing.price.toLocaleString("en-IN") %> /night
+          </span>
+        </h3>
+
+        <div class="d-flex gap-2 mb-2">
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-success">
+            <i class="fas fa-edit"></i> Edit
+          </a>
+          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+            <button class="btn btn-danger delete-button">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+      <!-- Review Form -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title h5 mb-3">Add a Review</h3>
+          <form
+            action="/listings/<%= listing._id %>/reviews"
+            method="POST"
+            class="needs-validation"
+            novalidate
+          >
+            <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <div class="d-flex align-items-center gap-2">
+                <input
+                  type="range"
+                  class="form-range"
+                  min="1"
+                  max="5"
+                  name="review[rating]"
+                  id="rating"
+                  required
+                />
+                <div id="rating-display" class="fs-5"></div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Comment</label>
+              <textarea
+                name="review[comment]"
+                class="form-control"
+                rows="3"
+                required
+                placeholder="Share your experience..."
+              ></textarea>
+              <div class="invalid-feedback">
+                Please provide your review comment.
+              </div>
+            </div>
+
+            <button class="btn btn-success">
+              <i class="fas fa-paper-plane"></i> Submit Review
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Reviews List -->
+      <h3 class="mb-3">Reviews</h3>
+      <div class="row g-3 mb-4">
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
+          <% for(let review of listing.reviews) { %>
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="rating-display" data-rating="<%= review.rating %>"></div>
+                    <small class="text-muted">
+                      <%= new Date(review.createdAt).toLocaleDateString() %>
+                    </small>
+                  </div>
+                  <p class="card-text mb-3"><%= review.comment %></p>
+                  <form
+                    action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                    method="POST"
+                    class="mt-auto"
+                  >
+                    <button class="btn btn-sm btn-outline-danger delete-button">
+                      <i class="fas fa-trash"></i> Delete Review
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% } else { %>
+          <p class="text-muted">No reviews yet. Be the first to leave a review!</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.listing-card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.show-img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.card-title {
+  color: #2d3436;
+  font-weight: 700;
+}
+
+.location {
+  color: #636e72;
+  font-size: 1.1rem;
+}
+
+.description {
+  color: #2d3436;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.rating-display {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+.reviews-section {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .show-img {
+    height: 300px;
+  }
+  
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .d-flex {
+    flex-direction: column;
+  }
+}
+</style>

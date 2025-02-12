@@ -1,0 +1,106 @@
+<footer class="footer mt-auto bg-white text-dark py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Company Info -->
+      <div class="col-12 col-md-4 mb-4">
+        <h5 class="footer-heading">About RoomTara</h5>
+        <p class="footer-text">
+          Find your perfect stay with RoomTara. We offer a wide range of accommodations worldwide.
+        </p>
+        <div class="f-info-socials mb-3">
+          <a href="https://twitter.com" target="_blank" title="Twitter" class="text-dark me-3">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://facebook.com" target="_blank" title="Facebook" class="text-dark me-3">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" title="Instagram" class="text-dark me-3">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" title="LinkedIn" class="text-dark me-3">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-md-4 mb-4">
+        <h5 class="footer-heading">Quick Links</h5>
+        <ul class="footer-links list-unstyled">
+          <li><a href="/listings" class="text-dark">All Listings</a></li>
+          <li><a href="/listings/new" class="text-dark">Add Your Room</a></li>
+          <li><a href="/privacy" class="text-dark">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-dark">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-6 col-md-4 mb-4">
+        <h5 class="footer-heading">Contact Us</h5>
+        <ul class="footer-links list-unstyled">
+          <li><i class="fas fa-envelope me-2"></i>support@roomtara.com</li>
+          <li><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>123 Booking Street, Suite 100<br>Travel City, TC 12345</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="row mt-4 pt-3 border-top border-dark">
+      <div class="col-12 text-center">
+        <p class="mb-0">&copy; <%= new Date().getFullYear() %> RoomTara Private Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background-color: #ffffff;
+  color: #333333;
+  border-top: 2px solid #e0e0e0; /* Added border */
+  border-bottom: 2px solid #e0e0e0; /* Added border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+.footer-heading {
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.footer-links a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #fe424d;
+}
+
+.f-info-socials a {
+  font-size: 1.5rem; /* Increased icon size */
+  transition: color 0.2s ease;
+  color: #333333;
+  margin-right: 1rem;
+}
+
+.f-info-socials a:hover {
+  color: #fe424d;
+}
+
+@media (max-width: 768px) {
+  .footer-heading {
+    margin-bottom: 1rem;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.6rem;
+  }
+}
+</style>

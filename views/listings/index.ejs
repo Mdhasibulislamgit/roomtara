@@ -1,0 +1,45 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div id="hero">
+  <div>
+    <h1>Welcome to RoomTara!</h1>
+    <p>Find your perfect getaway.</p>
+    <a href="/listings" class="btn">Explore Listings</a>
+  </div>
+</div>
+
+<div class="container listings-container">
+  
+
+  <div id="search-results" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <!-- Search results will be displayed here -->
+  </div>
+
+  <div id="all-listings" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" style="display: none;">
+      <% for (let listing of allListings){ %>
+        <div class="col">
+          <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="listing-card card">
+              <img
+                src="<%= listing.image %>"
+                class="card-img-top"
+                alt="<%= listing.title %>"
+              />
+              <div class="card-img-overlay"></div>
+              <div class="card-body">
+                <h3 class="card-title"><%= listing.title %></h3>
+                <p class="card-price">₹<%= listing.price.toLocaleString() %>/night</p>
+                <p class="card-location"><i class="fas fa-map-marker-alt"></i> <%= listing.location %>, <%= listing.country %></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } %>
+    </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("all-listings").style.display = 'flex';
+  });
+</script>

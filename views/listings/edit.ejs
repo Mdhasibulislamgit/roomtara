@@ -1,0 +1,167 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-4">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title mb-4">Edit Listing</h1>
+
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              name="listing[title]"
+              type="text"
+              class="form-control"
+              id="title"
+              value="<%= listing.title %>"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              name="listing[description]"
+              class="form-control"
+              id="description"
+              rows="3"
+              required
+            ><%= listing.description %></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label">
+              Image URL <span class="text-muted">(optional)</span>
+            </label>
+            <input
+              name="listing[image]"
+              type="text"
+              class="form-control"
+              id="image"
+              value="<%= listing.image %>"
+            />
+            <div class="form-text">
+              Leave empty to use default image.
+              <% if (listing.image === "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") { %>
+                <br>Currently using default image.
+              <% } %>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="price" class="form-label">Price (per night)</label>
+              <div class="input-group">
+                <span class="input-group-text">₹</span>
+                <input
+                  name="listing[price]"
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  value="<%= listing.price %>"
+                  required
+                  min="0"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="location" class="form-label">Location</label>
+              <input
+                name="listing[location]"
+                type="text"
+                class="form-control"
+                id="location"
+                value="<%= listing.location %>"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="country" class="form-label">Country</label>
+            <input
+              name="listing[country]"
+              type="text"
+              class="form-control"
+              id="country"
+              value="<%= listing.country %>"
+              required
+            />
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex">
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+            <a href="/listings/<%= listing._id %>" class="btn btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-success {
+  background-color: #198754;
+  border: none;
+  padding: 10px 20px;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+}
+
+.btn-secondary {
+  border: none;
+  padding: 10px 20px;
+}
+
+.form-text {
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .d-md-flex {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+</style>
+
+<script>
+// Form validation
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
